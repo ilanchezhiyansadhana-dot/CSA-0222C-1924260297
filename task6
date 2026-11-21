@@ -1,1 +1,110 @@
+#include <stdio.h>
 
+struct date {
+    int day, month, year;
+};
+
+enum type {
+    PACKAGED,
+    COOKED,
+    COMBO
+};
+
+struct item {
+    int id;
+    char name[30];
+    float price;
+    int stock;
+    float revenue;
+    enum type kind;
+
+    union {
+        struct date expiry;
+        struct date prepared;
+        int itemIds[3];
+    } details;
+};
+
+void display(struct item a[], int n) {
+    printf("\nCanteen Inventory\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("%s Price: %.2f Stock: %d\n",
+               a[i].name, a[i].price, a[i].stock);
+    }
+}
+
+void sell(struct item *p, int quantity) {
+    if (quantity > p->stock) {
+        printf("Insufficient stock for %s\n", p->name);
+    } else {
+        p->stock -= quantity;
+        p->revenue += p->price * quantity;
+
+        printf("Sale successful: %s x %d\n",
+               p->name, quantity);
+    }
+}
+
+void expiryWarning(struct item a[], int n) {
+    printf("\nExpiry Warnings\n");
+
+    for (int i = 0; i < n; i++) {
+        if (a[i].kind == PACKAGED &&
+            a[i].details.expiry.month == 11 &&
+            a[i].details.expiry.year == 2026 &&
+            a[i].details.expiry.day <= 23 &&
+            a[i].details.expiry.day >= 21) {
+
+            printf("%s is expiring soon\n", a[i].name);
+        }
+    }
+}
+
+void sortRevenue(struct item a[], int n) {
+    struct item temp;
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (a[i].revenue < a[j].revenue) {
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    struct item a[3] = {
+        {1, "Juice", 30, 10, 0, PACKAGED,
+         {.expiry = {22, 11, 2026}}},
+
+        {2, "Sandwich", 50, 5, 0, COOKED,
+         {.prepared = {21, 11, 2026}}},
+
+        {3, "Combo", 70, 4, 0, COMBO,
+         {.itemIds = {1, 2, 0}}}
+    };
+
+    display(a, 3);
+
+    printf("\nSales Details\n");
+
+    sell(&a[0], 2);
+    sell(&a[1], 2);
+    sell(&a[1], 10);
+
+    expiryWarning(a, 3);
+
+    sortRevenue(a, 3);
+
+    printf("\nRevenue Summary (Highest First)\n");
+
+    for (int i = 0; i < 3; i++) {
+        printf("%s Revenue: %.2f\n",
+               a[i].name, a[i].revenue);
+    }
+
+    return 0;
+}
