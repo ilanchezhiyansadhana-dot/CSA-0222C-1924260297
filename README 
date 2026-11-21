@@ -1,0 +1,86 @@
+CSA02 – C Programming Assignment 4 (CO4)
+
+Student Details
+
+- Name: Sadhana
+- Register Number: 1924260297
+- Course: C Programming
+- Course Code: CSA02
+- Assignment: 4
+- Topic: Modelling Real-World Data with Structures and Unions
+
+Objective
+
+To understand and implement structures, nested structures, arrays of structures, structure pointers, unions and storage classes in C programming.
+
+Software Requirements
+
+- Language: C
+- Compiler: GCC
+- Compiler Version: GCC 13 (or installed version)
+
+Tasks Completed
+
+Task 1 – Data Design Review
+
+Used structures and nested structures to store patient details.
+
+Task 2 – Nested Structures
+
+Implemented courier parcel tracking using nested structures and selection sort.
+
+Task 3 – Unions and Memory Layout
+
+Implemented a tagged union for weather station sensor readings.
+
+Task 4 – Structure Forensics
+
+Used structure pointers to update bank account balances.
+
+Task 5 – Storage Classes
+
+Demonstrated static and automatic storage classes.
+
+Task 6 – Design Challenge
+
+Developed a basic college canteen inventory and billing program.
+
+Compilation and Execution
+
+Compile each program using GCC:
+
+gcc -Wall -Wextra Task01.c -o Task01
+
+Run the program:
+
+./Task01
+
+Repeat the same steps for all six tasks by changing the filename.
+
+Folder Structure
+
+CSA02-1924260297-Assignment4/
+│
+├── Task01/
+│   ├── Task01.c
+│   └── output.png
+├── Task02/
+│   ├── Task02.c
+│   └── output.png
+├── Task03/
+│   ├── Task03.c
+│   └── output.png
+├── Task04/
+│   ├── Task04.c
+│   └── output.png
+├── Task05/
+│   ├── Task05.c
+│   └── output.png
+├── Task06/
+│   ├── Task06.c
+│   └── output.png
+└── README.md
+
+Conclusion
+
+Successfully completed all six tasks using C programming concepts. This assignment improved my understanding of structures, unions, pointers and storage classes.
